@@ -2,17 +2,22 @@
 #define __DEBUGLib__h__
 
 #ifdef DEBUGLib_DEBUG
-    #define DEBUG_PRINT(x)    Serial.print  (x)
-    #define DEBUG_PRINTLN(x)  Serial.println(x)
-    #define DEBUG_PRINT2(x,y)    Serial.print  (x,y)
-    #define DEBUG_PRINTLN2(x,y)  Serial.println(x,y)
-    #define DEBUG_PRINTF(x,y)    Serial.printf(x,y)
+    #define DEBUG_BEGIN(...)     Serial.begin(__VA_ARGS__)
+    #define DEBUG_PRINT(...)     Serial.print(__VA_ARGS__)
+    #define DEBUG_PRINTLN(...)   Serial.println(__VA_ARGS__)
+    #define DEBUG_PRINTF(...)    Serial.printf(__VA_ARGS__)    
+    
+    #define DEBUG_TIMESTAMP(...) \
+        Serial.print(millis()); \
+        Serial.print(": "); \
+        Serial.println(__VA_ARGS__)
 #else
-    #define DEBUG_PRINT(x)
-    #define DEBUG_PRINTLN(x)
-    #define DEBUG_PRINT2(x,y)
-    #define DEBUG_PRINTLN2(x,y)
-    #define DEBUG_PRINTF(x,y)
+    #define DEBUG_BEGIN(...)
+    #define DEBUG_PRINT(...)
+    #define DEBUG_PRINTLN(...)
+    #define DEBUG_PRINTF(...)
+
+    #define DEBUG_TIMESTAMP(...)
 #endif
 
 #endif
